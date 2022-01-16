@@ -1,0 +1,45 @@
+EXPRESSIONS
+    .          Any character except newline
+    [xyz]      Either one of x, y, z
+    [^xyz]     Any character except x, y, z
+    [x-y]      Any character between x and y (can be a-z, A-Z, 0-9)
+               Combine as e.g. [a-ZA-Z0-9] for alphanumeric
+    ()         Define group e.g. (\w*)
+    \<i>n</i>         Recall group with number
+    (?<<i>name</i>>)  Define named group (.NET only)
+    \k<<i>name</i>>   Recall group with name (.NET only)
+    |          OR between expressions
+    \          Escape keywords
+    \b         Backspace
+    \t         Tab
+    \r, \n     CR, LF
+    \e         Escape
+    \<i>nnn</i>       Octal (e.g. \040)
+    \x<i>nn</i>       Hexadecimal (e.g. \x20)
+    \u<i>nnnn</i>     Unicode (e.g. \u0020)
+    \w 	       Any word character
+    \W 	       Any non-word character
+    \s         Whitespace
+    \S 	       Non-whitespace
+    \d 	       Digit
+    \D 	       Non-digit
+
+SUFFIXES
+    ?     Zero or one times
+    *     Zero or many times
+    +     One or more times
+    {n}   Exactly <i>n</i> times
+    {n,}  <i>n</i> or more times
+    {n,m} Between <i>n</i> and <i>m</i> times
+
+ANCHORS
+    ^   Beginning of line
+    $   End of line
+    \<  Beginning of word
+    \>  End of word
+    \b  Beginning or end of word
+    \B  Reverse of \b
+    \A  Beginning of string
+    \Z  End of string or line
+    \z  End of string
+    \G  End of previous match

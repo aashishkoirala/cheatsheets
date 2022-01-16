@@ -1,0 +1,37 @@
+name: generate-html
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: [ docs ]
+  pull_request:
+    branches: [ main ]
+    paths-ignore: [ docs ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Go SDK
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+
+    - name: Generate HTML
+      run: make
+
+    - name: Push generated HTML
+      run: |
+        changes=$(git status -s -- docs)
+        if [ "$changes" != "" ]; then
+          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+          git pull github ${GITHUB_REF} --ff-only
+          git add -A docs
+          git config --global user.name "Aashish Koirala (Pipeline)"
+          git config --global user.email "aashishkoirala@gmail.com"
+          git commit -m "Updated HTML."
+          git push github ${GITHUB_REF}
+        fi

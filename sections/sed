@@ -1,0 +1,42 @@
+SCRIPT = <pattern><command>
+
+PATTERN
+   /pattern/
+       Text or basic regex to match (use -r to specify extended regex)
+   <i>n</i>
+       Line number (e.g. "3a something" appends "something" after 3rd line)
+   /pattern1/,/pattern2/ or linenum1,linenum2
+       Between two patterns or lines
+   <i>pattern</i>~<i>n</i>
+       Skip by <i>n</i> lines (e.g. 3~2, /something~3)
+
+OPTIONS
+   -n	Disable printing of pattern space
+   -e <i>script</i>, -f <i>script-file</i>
+        Add script (or file) to execution list
+   -i   Edit in place (to make backup, -i <i>suffix</i>)
+   -r   Enable extended Regex
+   -s   Treat files as separate
+
+FIND AND REPLACE
+    s/old/new             Replace first occurrence
+    s/old/new/g           Replace all occurrences
+    /pattern/s/old/new    Replace matching pattern
+
+    Use -r to specify regex for "old"
+    Use -e to apply multiple find-replaces
+
+COMMANDS
+    a/i text    Append (a) or insert (i) text after/before line
+    c text      Replace line with text
+    d, D        Delete all pattern space (d) or until newline (D)
+    e           Treat pattern space as command, execute and replace
+    e cmd       Execute command
+    F           Print file name
+    p, P        Print all pattern space (p) or until newline (P)
+    w file      Write all pattern space (w) to file or until newline (W)
+    y/src/dst/  Transliterate characters in src with those in dst
+    z           Empty (zap) pattern space
+    { cmd ; cmd ... }
+                Group several commands together
+    =           Print current input line number

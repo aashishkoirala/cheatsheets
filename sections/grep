@@ -1,0 +1,10 @@
+OPTIONS
+    egrep, grep -E
+            Enable extended regex
+    -i      Ignore case
+    -v      Don't match pattern
+    -w      Only whole words
+    -c      Count of matching (or non-matching with -v) lines
+    -l      Print name of each file with match
+    -n      Print line number before matching line
+    -r      Recursive (subdirectories)

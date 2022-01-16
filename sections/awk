@@ -1,0 +1,14 @@
+awk <i>options</i> <i>program</i>       Run <i>program</i> on file or stream
+
+OPTIONS
+  -F <i>delimeter</i>   Use a non-default delimiter, default is whitespace
+
+PROGRAMS
+   '{print $<i>n</i>}'
+                 Print the <i>n</i>th column on each line
+   '{/<i>text</i>/ <i>code</i>}'
+                 Run on lines containing <i>text</i>
+   '{<i>code</i>} END {<i>code</i>}'
+                 Run on each line and run at the end
+                 E.g. '{s+=$1} END {print s}'
+                      '{s+=$1;print $1} END {print s}'

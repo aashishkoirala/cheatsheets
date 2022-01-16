@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cheatsheets by Aashish Koirala- vi, tmux, regex, grep, sed, awk, ">
+    <meta name="author" content="Aashish Koirala">
+    <title>Cheatsheets</title>
+    <link rel="icon" href="favicon.png">
+    <style type="text/css">
+        body {
+            background-color: darkslategrey;
+            color: grey;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-left {
+            flex: 1;
+            border: 0;
+            border-right: 1px solid grey;
+            margin-right: 5px;
+            padding: 5px;
+            padding-right: 10px;
+        }  
+
+        .flex-right {
+            flex: 6;
+            border: 0;
+            padding: 5px;
+        }  
+
+        pre {
+            font-family: 'Fira Code', 'Consolas', 'Courier New';
+            font-size: 12pt;
+        }
+
+        a.section-link, a.section-link:link, a.section-link:visited {
+            border: 1px solid grey;
+            padding: 10px;
+            margin: 10px;
+            color: grey;
+            text-decoration: none;
+        }
+
+        a.section-link:hover, a.section-link:active {
+            background: gray;
+            color: black;
+        }
+
+        div.section {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        function load(sectionName) {
+            document.querySelectorAll('.section').forEach(function (s) {
+                s.style.display = 'none';
+            });
+            document.querySelector('.section#' + sectionName).style.display = 'inline';
+        }
+    </script>
+</head>
+
+<body onload="load('vi')">
+    <div class="flex-container">
+
+        <div class="flex-left">
+          <h2>&nbsp;Cheatsheets</h2><br/>
+	  
+	    <a class="section-link" id="vi-link" href="#" onclick="load('vi')">vi</a><br/><br/><br/>
+	  
+	    <a class="section-link" id="tmux-link" href="#" onclick="load('tmux')">tmux</a><br/><br/><br/>
+	  
+	    <a class="section-link" id="regex-link" href="#" onclick="load('regex')">regex</a><br/><br/><br/>
+	  
+	    <a class="section-link" id="grep-link" href="#" onclick="load('grep')">grep</a><br/><br/><br/>
+	  
+	    <a class="section-link" id="sed-link" href="#" onclick="load('sed')">sed</a><br/><br/><br/>
+	  
+	    <a class="section-link" id="awk-link" href="#" onclick="load('awk')">awk</a><br/><br/><br/>
+	  
+       </div>
+        
+        <div class="flex-right">
+	    
+	      <div id="vi" class="section">
+		<h1>vi</h1>
+                <pre>
+TYPING TEXT
+    a         Switch to insert mode after cursor
+    i         Switch to insert mode before cursor
+    o         Insert line below and switch to mode
+    O         Insert line above and switch to mode
+    :r file   Insert file after current line
+    cw/cc/c$  Clear word/line/end of line
+    R         Switch to replace (overwrite) mode
+    C-h/BkSp  Delete back character in insert mode
+    C-w       Delete back word in insert mode
+    C-u       Delete back to beginning of insert mode
+    Esc       Switch out of insert/replace/etc. modes
+    r<i>x</i>        Replace character with <i>x</i>
+        
+GENERAL
+    .        Repeat last change
+    v        Visual selection mode (use for cut/copy/paste)
+    :w <i>name</i>  Save to file name
+    :wq      Save current file and quit
+    :q!      Quit without saving changes
+    :sh      Execute shell commands
+    u/U      Undo last change / all changes on line
+    :e <i>name</i>  Edit file <i>name</i>
+             Use to share buffers/copy/paste between files  
+
+NAVIGATION
+    C-d     Scroll down (half a screen)
+    C-u     Scroll up (half a screen)
+    C-f     Page forward
+    C-b     Page backward
+    C-g     Show line count and percentage
+    G       Go to last line
+    <i>n</i>G      Go to line <i>n</i>
+    :<i>n</i>      Go to line <i>n</i>
+    H       Go to upper left corner
+    M       Go to middle line
+    L       Go to lower left corner
+    ^       Go to beginning of line
+    $       Go to end of line
+    w       Go forward one word
+    b       Go back one word
+    f<i>x</i>      Find <i>x</i>
+    ;       Repeat last find
+
+DELETION (CUT)
+    dd      Delete current line to general buffer
+    <i>n</i>dd     Delete <i>n</i> lines to general buffer
+    dw      Delete word to general buffer
+    d<i>n</i>w     Delete <i>n</i> words to general buffer
+    d)      Delete to end of sentence to general buffer
+    db      Delete previous word to general buffer
+    D       Delete to end of line to general buffer
+    x       Delete character to general buffer
+    J       Join lines
+    "<i>xn</i>dd   Delete <i>n</i> lines to buffer <i>x</i>
+    "<i>Xn</i>dd   Delete <i>n</i> lines; append to buffer <i>x</i>
+
+COPY/PASTE
+   yy/Y      Yank (copy) line to general buffer
+    yw       Yank word to general buffer
+    "<i>xn</i>yy    Yank <i>n</i> lines to buffer <i>x</i>
+    p/P      Paste/put general buffer after/before cursor
+    "<i>x</i>p/P    Paste/put text from buffer <i>x</i> after/before cursor
+
+SEARCH AND REPLACE
+    /string     Search forward
+    ?string     Search backward
+    n           Repeat search
+    N           Repeat search reverse
+
+    :<i>addr</i>s/<i>old</i>/<i>new</i>/     Replace first occurrence
+    :<i>addr</i>s/<i>old</i>/<i>new</i>/g    Replace all occurrences
+
+    Address     .         Current line
+                <i>n</i>         Line number <i>n</i>
+                .+<i>n</i>       Current line plus <i>n</i> lines
+                $         Last line
+                /<i>text</i>/    Line that contains <i>text</i>
+                %         Entire file
+
+    <i>addr1,addr2</i>     Specifies a range                
+
+    Regex for search string     ^   Beginning of line
+                                $   End of line
+                                .   Any single character
+                                *   Any previous character
+                                .*  Any character
+
+OPTIONS
+    :set <i>option</i>
+    :set no<i>option</i>
+
+    list        Invisible characters
+    number      Line numbers
+    autoindent  Indent after CR
+    showmatch   Matching parentheses
+    showmode    Mode on last line of screen
+
+    :set all    Show values of all possible parameters
+
+                </pre>
+              </div>
+	    
+	      <div id="tmux" class="section">
+		<h1>tmux</h1>
+                <pre>
+COMMAND MODE
+    C-b :       Enter command mode
+
+PANES
+    C-b ;                    Switch to last active
+    C-b %                    Split horizontally
+    C-b "                    Split vertically
+    C-b {                    Move current to left
+    C-b }                    Move current to right
+    C-b <i>arrows</i>               Switch to pane in direction
+    C-b o                    Next pane
+    C-b q                    Show pane numbers
+    C-b q 0-9                Switch to pane by number
+    C-b z                    Expand pane on/off
+    C-b C-<i>arrows</i>             Resize pane
+    C-b !                    Convert to window
+    C-b x                    Close
+    :setw synchronize-panes  Toggle synchronize-panes
+ 
+WINDOWS
+    tmux new -s <i>sess</i> -n <i>win</i>,
+    :new -s <i>sess</i> -n <i>win</i>
+                  Start new session <i>sess</i> with window <i>win</i>
+    C-b c         Create window
+    C-b ,         Rename current window
+    C-b &         Close current window
+    C-b p         Previous window
+    C-b n         Next window
+    C-b 0-9       Switch to window by number
+    C-b l         Switch to last active
+    :swap-window -s <i>srcnum</i> -t <i>targetnum></i>
+                  Swap windows by number (current if -s skipped)
+
+SESSIONS                    
+    tmux, tmux new, :new               
+                       Start new session
+    tmux new -s <i>name</i>, :new -s <i>name</i>     
+                       Start new session called <i>name</i>
+    tmux kill-session -t <i>name</i>          
+                       Kill session <i>name</i>
+    tmux kill-session -a               
+                       Kill all sessions but the current
+    tmux kill-session -a -t <i>name</i>
+                       Kill all session but <i>name</i>
+    tmux a, :attach, :attach -t <i>name</i>
+                       Attach to last session or <i>name</i>
+    C-b $              Rename session
+    C-b d              Detach from session
+    :attach -d         Detach others on session
+    C-b s, tmux ls     Show all sessions
+    C-b w              Session and Window Preview
+    C-b (              Move to previous session
+    C-b )              Move to next session
+
+COPY MODE
+    :setw -g mode-keys vi        Use vi keys in buffer
+    C-b [                        Enter copy mode
+    C-b PgUp                     Enter copy mode and scroll one page up
+    q                            Quit copy mode
+    g                            Go to top line
+    G                            Go to bottom line
+    <i>Arrows</i>                       Scroll
+    w                            Move forward one word
+    b                            Move back one word
+    /, ?                         Search forward, backward
+    n, N                         Repeat search (next, previous)
+    Spacebar                     Start selection
+    Esc                          Clear selection
+    Enter                        Copy selection
+    C-b ]                        Paste selection (buffer 0)
+    :show-buffer                 Display buffer 0 contents
+    :capture-pane                Copy visible contents of pane to a buffer
+    :list-buffers                Show all buffers
+    :choose-buffer               Show all buffers and paste selected
+    :save-buffer <i>name</i>            Save buffer contents to file <i>name</i>
+    :delete-buffer -b <i>n</i>, :delete buffer_<i>n</i>
+                                 Delete buffer <i>n</i> content
+
+MISC
+    :set -g <i>option</i>       Set <i>option</i> for all sessions
+    :setw -g <i>option</i>      Set <i>option</i> for all windows
+    :info                Show all sessions, windows, panes
+
+                </pre>
+              </div>
+	    
+	      <div id="regex" class="section">
+		<h1>regex</h1>
+                <pre>
+EXPRESSIONS
+    .          Any character except newline
+    [xyz]      Either one of x, y, z
+    [^xyz]     Any character except x, y, z
+    [x-y]      Any character between x and y (can be a-z, A-Z, 0-9)
+               Combine as e.g. [a-ZA-Z0-9] for alphanumeric
+    ()         Define group e.g. (\w*)
+    \<i>n</i>         Recall group with number
+    (?<<i>name</i>>)  Define named group (.NET only)
+    \k<<i>name</i>>   Recall group with name (.NET only)
+    |          OR between expressions
+    \          Escape keywords
+    \b         Backspace
+    \t         Tab
+    \r, \n     CR, LF
+    \e         Escape
+    \<i>nnn</i>       Octal (e.g. \040)
+    \x<i>nn</i>       Hexadecimal (e.g. \x20)
+    \u<i>nnnn</i>     Unicode (e.g. \u0020)
+    \w 	       Any word character
+    \W 	       Any non-word character
+    \s         Whitespace
+    \S 	       Non-whitespace
+    \d 	       Digit
+    \D 	       Non-digit
+
+SUFFIXES
+    ?     Zero or one times
+    *     Zero or many times
+    +     One or more times
+    {n}   Exactly <i>n</i> times
+    {n,}  <i>n</i> or more times
+    {n,m} Between <i>n</i> and <i>m</i> times
+
+ANCHORS
+    ^   Beginning of line
+    $   End of line
+    \<  Beginning of word
+    \>  End of word
+    \b  Beginning or end of word
+    \B  Reverse of \b
+    \A  Beginning of string
+    \Z  End of string or line
+    \z  End of string
+    \G  End of previous match
+
+                </pre>
+              </div>
+	    
+	      <div id="grep" class="section">
+		<h1>grep</h1>
+                <pre>
+OPTIONS
+    egrep, grep -E
+            Enable extended regex
+    -i      Ignore case
+    -v      Don't match pattern
+    -w      Only whole words
+    -c      Count of matching (or non-matching with -v) lines
+    -l      Print name of each file with match
+    -n      Print line number before matching line
+    -r      Recursive (subdirectories)
+
+                </pre>
+              </div>
+	    
+	      <div id="sed" class="section">
+		<h1>sed</h1>
+                <pre>
+SCRIPT = <pattern><command>
+
+PATTERN
+   /pattern/
+       Text or basic regex to match (use -r to specify extended regex)
+   <i>n</i>
+       Line number (e.g. "3a something" appends "something" after 3rd line)
+   /pattern1/,/pattern2/ or linenum1,linenum2
+       Between two patterns or lines
+   <i>pattern</i>~<i>n</i>
+       Skip by <i>n</i> lines (e.g. 3~2, /something~3)
+
+OPTIONS
+   -n	Disable printing of pattern space
+   -e <i>script</i>, -f <i>script-file</i>
+        Add script (or file) to execution list
+   -i   Edit in place (to make backup, -i <i>suffix</i>)
+   -r   Enable extended Regex
+   -s   Treat files as separate
+
+FIND AND REPLACE
+    s/old/new             Replace first occurrence
+    s/old/new/g           Replace all occurrences
+    /pattern/s/old/new    Replace matching pattern
+
+    Use -r to specify regex for "old"
+    Use -e to apply multiple find-replaces
+
+COMMANDS
+    a/i text    Append (a) or insert (i) text after/before line
+    c text      Replace line with text
+    d, D        Delete all pattern space (d) or until newline (D)
+    e           Treat pattern space as command, execute and replace
+    e cmd       Execute command
+    F           Print file name
+    p, P        Print all pattern space (p) or until newline (P)
+    w file      Write all pattern space (w) to file or until newline (W)
+    y/src/dst/  Transliterate characters in src with those in dst
+    z           Empty (zap) pattern space
+    { cmd ; cmd ... }
+                Group several commands together
+    =           Print current input line number
+
+                </pre>
+              </div>
+	    
+	      <div id="awk" class="section">
+		<h1>awk</h1>
+                <pre>
+awk <i>options</i> <i>program</i>       Run <i>program</i> on file or stream
+
+OPTIONS
+  -F <i>delimeter</i>   Use a non-default delimiter, default is whitespace
+
+PROGRAMS
+   '{print $<i>n</i>}'
+                 Print the <i>n</i>th column on each line
+   '{/<i>text</i>/ <i>code</i>}'
+                 Run on lines containing <i>text</i>
+   '{<i>code</i>} END {<i>code</i>}'
+                 Run on each line and run at the end
+                 E.g. '{s+=$1} END {print s}'
+                      '{s+=$1;print $1} END {print s}'
+
+                </pre>
+              </div>
+	    
+        </div>        
+      </div>
+</body>
+</html>
+

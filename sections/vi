@@ -1,0 +1,99 @@
+TYPING TEXT
+    a         Switch to insert mode after cursor
+    i         Switch to insert mode before cursor
+    o         Insert line below and switch to mode
+    O         Insert line above and switch to mode
+    :r file   Insert file after current line
+    cw/cc/c$  Clear word/line/end of line
+    R         Switch to replace (overwrite) mode
+    C-h/BkSp  Delete back character in insert mode
+    C-w       Delete back word in insert mode
+    C-u       Delete back to beginning of insert mode
+    Esc       Switch out of insert/replace/etc. modes
+    r<i>x</i>        Replace character with <i>x</i>
+        
+GENERAL
+    .        Repeat last change
+    v        Visual selection mode (use for cut/copy/paste)
+    :w <i>name</i>  Save to file name
+    :wq      Save current file and quit
+    :q!      Quit without saving changes
+    :sh      Execute shell commands
+    u/U      Undo last change / all changes on line
+    :e <i>name</i>  Edit file <i>name</i>
+             Use to share buffers/copy/paste between files  
+
+NAVIGATION
+    C-d     Scroll down (half a screen)
+    C-u     Scroll up (half a screen)
+    C-f     Page forward
+    C-b     Page backward
+    C-g     Show line count and percentage
+    G       Go to last line
+    <i>n</i>G      Go to line <i>n</i>
+    :<i>n</i>      Go to line <i>n</i>
+    H       Go to upper left corner
+    M       Go to middle line
+    L       Go to lower left corner
+    ^       Go to beginning of line
+    $       Go to end of line
+    w       Go forward one word
+    b       Go back one word
+    f<i>x</i>      Find <i>x</i>
+    ;       Repeat last find
+
+DELETION (CUT)
+    dd      Delete current line to general buffer
+    <i>n</i>dd     Delete <i>n</i> lines to general buffer
+    dw      Delete word to general buffer
+    d<i>n</i>w     Delete <i>n</i> words to general buffer
+    d)      Delete to end of sentence to general buffer
+    db      Delete previous word to general buffer
+    D       Delete to end of line to general buffer
+    x       Delete character to general buffer
+    J       Join lines
+    "<i>xn</i>dd   Delete <i>n</i> lines to buffer <i>x</i>
+    "<i>Xn</i>dd   Delete <i>n</i> lines; append to buffer <i>x</i>
+
+COPY/PASTE
+   yy/Y      Yank (copy) line to general buffer
+    yw       Yank word to general buffer
+    "<i>xn</i>yy    Yank <i>n</i> lines to buffer <i>x</i>
+    p/P      Paste/put general buffer after/before cursor
+    "<i>x</i>p/P    Paste/put text from buffer <i>x</i> after/before cursor
+
+SEARCH AND REPLACE
+    /string     Search forward
+    ?string     Search backward
+    n           Repeat search
+    N           Repeat search reverse
+
+    :<i>addr</i>s/<i>old</i>/<i>new</i>/     Replace first occurrence
+    :<i>addr</i>s/<i>old</i>/<i>new</i>/g    Replace all occurrences
+
+    Address     .         Current line
+                <i>n</i>         Line number <i>n</i>
+                .+<i>n</i>       Current line plus <i>n</i> lines
+                $         Last line
+                /<i>text</i>/    Line that contains <i>text</i>
+                %         Entire file
+
+    <i>addr1,addr2</i>     Specifies a range                
+
+    Regex for search string     ^   Beginning of line
+                                $   End of line
+                                .   Any single character
+                                *   Any previous character
+                                .*  Any character
+
+OPTIONS
+    :set <i>option</i>
+    :set no<i>option</i>
+
+    list        Invisible characters
+    number      Line numbers
+    autoindent  Indent after CR
+    showmatch   Matching parentheses
+    showmode    Mode on last line of screen
+
+    :set all    Show values of all possible parameters

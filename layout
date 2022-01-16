@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cheatsheets by Aashish Koirala- {{range $s := .}}{{$s}}, {{end}}">
+    <meta name="author" content="Aashish Koirala">
+    <title>Cheatsheets</title>
+    <link rel="icon" href="favicon.png">
+    <style type="text/css">
+        body {
+            background-color: darkslategrey;
+            color: grey;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-left {
+            flex: 1;
+            border: 0;
+            border-right: 1px solid grey;
+            margin-right: 5px;
+            padding: 5px;
+            padding-right: 10px;
+        }  
+
+        .flex-right {
+            flex: 6;
+            border: 0;
+            padding: 5px;
+        }  
+
+        pre {
+            font-family: 'Fira Code', 'Consolas', 'Courier New';
+            font-size: 12pt;
+        }
+
+        a.section-link, a.section-link:link, a.section-link:visited {
+            border: 1px solid grey;
+            padding: 10px;
+            margin: 10px;
+            color: grey;
+            text-decoration: none;
+        }
+
+        a.section-link:hover, a.section-link:active {
+            background: gray;
+            color: black;
+        }
+
+        div.section {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        function load(sectionName) {
+            document.querySelectorAll('.section').forEach(function (s) {
+                s.style.display = 'none';
+            });
+            document.querySelector('.section#' + sectionName).style.display = 'inline';
+        }
+    </script>
+</head>
+
+<body onload="load('{{ index . 0 }}')">
+    <div class="flex-container">
+
+        <div class="flex-left">
+          <h2>&nbsp;Cheatsheets</h2><br/>
+	  {{ range $sec := . }}
+	    <a class="section-link" id="{{ $sec }}-link" href="#" onclick="load('{{ $sec }}')">{{ $sec }}</a><br/><br/><br/>
+	  {{ end }}
+       </div>
+        
+        <div class="flex-right">
+	    {{ range $sec := . }}
+	      <div id="{{ $sec }}" class="section">
+		<h1>{{ $sec }}</h1>
+                <pre>
+[[ {{ $sec }} ]]
+                </pre>
+              </div>
+	    {{ end }}
+        </div>        
+      </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+COMMAND MODE
+    C-b :       Enter command mode
+
+PANES
+    C-b ;                    Switch to last active
+    C-b %                    Split horizontally
+    C-b "                    Split vertically
+    C-b {                    Move current to left
+    C-b }                    Move current to right
+    C-b <i>arrows</i>               Switch to pane in direction
+    C-b o                    Next pane
+    C-b q                    Show pane numbers
+    C-b q 0-9                Switch to pane by number
+    C-b z                    Expand pane on/off
+    C-b C-<i>arrows</i>             Resize pane
+    C-b !                    Convert to window
+    C-b x                    Close
+    :setw synchronize-panes  Toggle synchronize-panes
+ 
+WINDOWS
+    tmux new -s <i>sess</i> -n <i>win</i>,
+    :new -s <i>sess</i> -n <i>win</i>
+                  Start new session <i>sess</i> with window <i>win</i>
+    C-b c         Create window
+    C-b ,         Rename current window
+    C-b &         Close current window
+    C-b p         Previous window
+    C-b n         Next window
+    C-b 0-9       Switch to window by number
+    C-b l         Switch to last active
+    :swap-window -s <i>srcnum</i> -t <i>targetnum></i>
+                  Swap windows by number (current if -s skipped)
+
+SESSIONS                    
+    tmux, tmux new, :new               
+                       Start new session
+    tmux new -s <i>name</i>, :new -s <i>name</i>     
+                       Start new session called <i>name</i>
+    tmux kill-session -t <i>name</i>          
+                       Kill session <i>name</i>
+    tmux kill-session -a               
+                       Kill all sessions but the current
+    tmux kill-session -a -t <i>name</i>
+                       Kill all session but <i>name</i>
+    tmux a, :attach, :attach -t <i>name</i>
+                       Attach to last session or <i>name</i>
+    C-b $              Rename session
+    C-b d              Detach from session
+    :attach -d         Detach others on session
+    C-b s, tmux ls     Show all sessions
+    C-b w              Session and Window Preview
+    C-b (              Move to previous session
+    C-b )              Move to next session
+
+COPY MODE
+    :setw -g mode-keys vi        Use vi keys in buffer
+    C-b [                        Enter copy mode
+    C-b PgUp                     Enter copy mode and scroll one page up
+    q                            Quit copy mode
+    g                            Go to top line
+    G                            Go to bottom line
+    <i>Arrows</i>                       Scroll
+    w                            Move forward one word
+    b                            Move back one word
+    /, ?                         Search forward, backward
+    n, N                         Repeat search (next, previous)
+    Spacebar                     Start selection
+    Esc                          Clear selection
+    Enter                        Copy selection
+    C-b ]                        Paste selection (buffer 0)
+    :show-buffer                 Display buffer 0 contents
+    :capture-pane                Copy visible contents of pane to a buffer
+    :list-buffers                Show all buffers
+    :choose-buffer               Show all buffers and paste selected
+    :save-buffer <i>name</i>            Save buffer contents to file <i>name</i>
+    :delete-buffer -b <i>n</i>, :delete buffer_<i>n</i>
+                                 Delete buffer <i>n</i> content
+
+MISC
+    :set -g <i>option</i>       Set <i>option</i> for all sessions
+    :setw -g <i>option</i>      Set <i>option</i> for all windows
+    :info                Show all sessions, windows, panes
