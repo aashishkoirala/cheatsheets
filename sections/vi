@@ -21,7 +21,15 @@ GENERAL
     :sh      Execute shell commands
     u/U      Undo last change / all changes on line
     :e <i>name</i>  Edit file <i>name</i>
-             Use to share buffers/copy/paste between files  
+             Use to share buffers/copy/paste between files
+             Specifying directory will bring up netrw
+    :C-w s
+             Horizontal split
+    :Vsp or C-w v
+             Vertical split 
+    :Ex, :Vex, :Sex, :Rex
+             Explorer in current, vertical split, horizontal
+             split, and to return to explorer from file             
 
 NAVIGATION
     C-d     Scroll down (half a screen)
