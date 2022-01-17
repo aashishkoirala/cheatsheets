@@ -12,10 +12,12 @@
             background-color: darkslategrey;
             color: grey;
             font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
         }
 
         .flex-container {
             display: flex;
+            background-color: darkslategrey;
         }
 
         .flex-left {
